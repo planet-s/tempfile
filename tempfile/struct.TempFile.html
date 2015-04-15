@@ -53,7 +53,7 @@
 references to the same file.</p>
 
 <p>This can be useful if you want multiple seek positions in the same temporary file.
-Additionally, this function guarentees that all of the returned temporary file objects
+Additionally, this function guarantees that all of the returned temporary file objects
 refer to the same underlying temporary file even in the presence of a pathological
 temporary file cleaner.</p>
 </div><h4 id='method.shared_in' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.shared_in' class='fnname'>shared_in</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(dir: P, count: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../tempfile/struct.TempFile.html' title='tempfile::TempFile'>TempFile</a>&gt;&gt;</code></h4>
@@ -66,7 +66,7 @@ temporary file cleaner.</p>
 <div class='docblock'><p>Re-open the temporary file. The returned TempFile will refer to the same underlying
 temporary file but will have an independent offset.</p>
 
-<p>This method is only available on windows and linux, not FreeBSD/MacOS. Unfortunately, it is
+<p>This method is only available on windows and Linux, not FreeBSD/MacOS. Unfortunately, it is
 impossible to reliably implement this method on those operating systems.</p>
 
 <p>If you need your code to be cross-platform, please use <code>shared</code>/<code>shared_in</code> defined above.</p>

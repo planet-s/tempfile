@@ -194,7 +194,7 @@
     <span class='doccomment'>/// references to the same file.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This can be useful if you want multiple seek positions in the same temporary file.</span>
-    <span class='doccomment'>/// Additionally, this function guarentees that all of the returned temporary file objects</span>
+    <span class='doccomment'>/// Additionally, this function guarantees that all of the returned temporary file objects</span>
     <span class='doccomment'>/// refer to the same underlying temporary file even in the presence of a pathological</span>
     <span class='doccomment'>/// temporary file cleaner.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
@@ -224,7 +224,7 @@
     <span class='doccomment'>/// Re-open the temporary file. The returned TempFile will refer to the same underlying</span>
     <span class='doccomment'>/// temporary file but will have an independent offset.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This method is only available on windows and linux, not FreeBSD/MacOS. Unfortunately, it is</span>
+    <span class='doccomment'>/// This method is only available on windows and Linux, not FreeBSD/MacOS. Unfortunately, it is</span>
     <span class='doccomment'>/// impossible to reliably implement this method on those operating systems.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If you need your code to be cross-platform, please use `shared`/`shared_in` defined above.</span>
