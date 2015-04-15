@@ -157,13 +157,23 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>, <span class='ident'>collections</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
 <span class='doccomment'>//! Securely create and manage temporary files. Temporary files created by this create are</span>
-<span class='doccomment'>//! automatically deleted on exit (actually, they&#39;re usually deleted immediately after they are</span>
-<span class='doccomment'>//! created).</span>
+<span class='doccomment'>//! automatically deleted. When they are deleted depends on the platform:</span>
 <span class='doccomment'>//!</span>
+<span class='doccomment'>//! *nix: The temporary file is immediately unlinked. The OS will delete it when the last open</span>
+<span class='doccomment'>//! copy of it is closed (the last TempFile reference to it is dropped).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Windows: The temporary file is marked DeleteOnClose and, again, will be deleted when the last</span>
+<span class='doccomment'>//! open copy of it is closed. Unlike *nix operating systems, the file is not immediately unlinked</span>
+<span class='doccomment'>//! from the filesystem.</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rand</span>;
 

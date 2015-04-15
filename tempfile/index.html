@@ -43,10 +43,16 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>tempfile</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/tempfile/lib.rs.html#1-117'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/tempfile/lib.rs.html#1-122'>[src]</a></span></h1>
 <div class='docblock'><p>Securely create and manage temporary files. Temporary files created by this create are
-automatically deleted on exit (actually, they&#39;re usually deleted immediately after they are
-created).</p>
+automatically deleted. When they are deleted depends on the platform:</p>
+
+<p>*nix: The temporary file is immediately unlinked. The OS will delete it when the last open
+copy of it is closed (the last TempFile reference to it is dropped).</p>
+
+<p>Windows: The temporary file is marked DeleteOnClose and, again, will be deleted when the last
+open copy of it is closed. Unlike *nix operating systems, the file is not immediately unlinked
+from the filesystem.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
