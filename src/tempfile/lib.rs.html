@@ -339,6 +339,8 @@
 <span id="297">297</span>
 <span id="298">298</span>
 <span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>, <span class='ident'>collections</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
@@ -424,6 +426,8 @@
     <span class='doccomment'>/// impossible to reliably implement this method on those operating systems.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If you need your code to be cross-platform, please use `shared`/`shared_in` defined above.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// **Unstable**: This is platform specific and may go away in the future.</span>
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>windows</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
     <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>reopen</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>TempFile</span><span class='op'>&gt;</span> {
