@@ -341,6 +341,12 @@
 <span id="299">299</span>
 <span id="300">300</span>
 <span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>, <span class='ident'>collections</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
@@ -493,6 +499,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;NamedTempFile({:?})&quot;</span>, <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>path</span>)
     }
@@ -505,21 +512,25 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>PersistError</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>io</span>::<span class='ident'>Error</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>error</span>: <span class='ident'>PersistError</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='ident'>Error</span> {
         <span class='ident'>error</span>.<span class='ident'>error</span>
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>PersistError</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;failed to persist temporary file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>error</span>)
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>error</span>::<span class='ident'>Error</span> <span class='kw'>for</span> <span class='ident'>PersistError</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>description</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
         <span class='string'>&quot;failed to persist temporary file&quot;</span>
     }
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>cause</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>error</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>error</span>)
     }
@@ -533,7 +544,7 @@
     }
 
     <span class='doccomment'>/// Create a new temporary file in the specified directory.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_in</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='ident'>dir</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>NamedTempFile</span><span class='op'>&gt;</span> {
         <span class='kw'>loop</span> {
             <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>dir</span>.<span class='ident'>as_ref</span>().<span class='ident'>join</span>(<span class='kw-2'>&amp;</span><span class='ident'>util</span>::<span class='ident'>tmpname</span>());
@@ -546,19 +557,19 @@
     }
 
     <span class='doccomment'>/// Number of bytes in the file.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>len</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>metadata</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>m</span><span class='op'>|</span> <span class='ident'>m</span>.<span class='ident'>len</span>())
     }
 
     <span class='doccomment'>/// Truncate the file to `size` bytes.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_len</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>size</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>set_len</span>(<span class='ident'>size</span>)
     }
 
     <span class='doccomment'>/// Get the temporary file&#39;s path.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Path</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>path</span>
     }
@@ -566,7 +577,7 @@
     <span class='doccomment'>/// Close and remove the temporary file.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Use this if you want to detect errors in deleting the file.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>close</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>NamedTempFileInner</span> { <span class='ident'>path</span>, <span class='ident'>file</span> } <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>drop</span>(<span class='ident'>file</span>);
@@ -575,7 +586,7 @@
 
     <span class='doccomment'>/// Extract the path to the temporary file. Calling this will prevent the temporary file from</span>
     <span class='doccomment'>/// being automatically deleted.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_path</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PathBuf</span> {
         <span class='kw'>let</span> <span class='ident'>NamedTempFileInner</span> { <span class='ident'>path</span>, .. } <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>path</span>
@@ -585,6 +596,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If a file exists at the target path, persist will atomically replace it. If this method</span>
     <span class='doccomment'>/// fails, it will return `self` in the resulting PersistError.</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>persist</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span>, <span class='ident'>PersistError</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='ident'>fs</span>::<span class='ident'>rename</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>) {
             <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>),
@@ -594,7 +606,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>NamedTempFileInner</span> { <span class='ident'>file</span>, <span class='ident'>path</span> }) <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>() {
             <span class='ident'>drop</span>(<span class='ident'>file</span>);
@@ -604,25 +616,25 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Read</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>)
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Write</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>write</span>(<span class='ident'>buf</span>)
     }
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>flush</span>()
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Seek</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>seek</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>SeekFrom</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>seek</span>(<span class='ident'>pos</span>)
     }
@@ -630,7 +642,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span>
 <span class='kw'>impl</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>io</span>::<span class='ident'>AsRawFd</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>as_raw_fd</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>io</span>::<span class='ident'>RawFd</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>as_raw_fd</span>()
     }
@@ -638,7 +650,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
 <span class='kw'>impl</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>windows</span>::<span class='ident'>io</span>::<span class='ident'>AsRawHandle</span> <span class='kw'>for</span> <span class='ident'>NamedTempFile</span> {
-    <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>as_raw_handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>windows</span>::<span class='ident'>io</span>::<span class='ident'>RawHandle</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>.<span class='ident'>as_raw_handle</span>()
     }
