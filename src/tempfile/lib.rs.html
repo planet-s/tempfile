@@ -349,6 +349,8 @@
 <span id="307">307</span>
 <span id="308">308</span>
 <span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
@@ -600,6 +602,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If a file exists at the target path, persist will atomically replace it. If this method</span>
     <span class='doccomment'>/// fails, it will return `self` in the resulting PersistError.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Note: Temporary files cannot be persisted across filesystems.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>persist</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span>, <span class='ident'>PersistError</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='ident'>fs</span>::<span class='ident'>rename</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>) {

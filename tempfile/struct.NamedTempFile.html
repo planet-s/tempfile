@@ -42,8 +42,8 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>tempfile</a>::<wbr><a class='struct' href=''>NamedTempFile</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-750' class='srclink' href='../src/tempfile/lib.rs.html#146'>[src]</a></span></h1>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[-]</a>
+        </span><a id='src-750' class='srclink' href='../src/tempfile/lib.rs.html#146' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NamedTempFile(_);</pre><div class='docblock'><p>A named temporary file.</p>
 
 <p>This variant is <em>NOT</em> secure/reliable in the presence of a pathological temporary file cleaner.</p>
@@ -74,6 +74,8 @@ being automatically deleted.</p>
 
 <p>If a file exists at the target path, persist will atomically replace it. If this method
 fails, it will return <code>self</code> in the resulting PersistError.</p>
+
+<p>Note: Temporary files cannot be persisted across filesystems.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.read' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html#method.read' class='fnname'>read</a>(&amp;mut self, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
