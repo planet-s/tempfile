@@ -42,7 +42,7 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>tempfile</a>::<wbr><a class='struct' href=''>NamedTempFile</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[-]</a>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
         </span><a id='src-750' class='srclink' href='../src/tempfile/lib.rs.html#146' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NamedTempFile(_);</pre><div class='docblock'><p>A named temporary file.</p>
 
@@ -56,8 +56,8 @@ dropped, these temporary files will not be deleted on abort, resource leak, earl
 <div class='docblock'><p>Create a new temporary file.</p>
 </div><h4 id='method.new_in' class='method'><code>fn <a href='#method.new_in' class='fnname'>new_in</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(dir: P) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a>&gt;</code></h4>
 <div class='docblock'><p>Create a new temporary file in the specified directory.</p>
-</div><h4 id='method.len' class='method'><code>fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Number of bytes in the file.</p>
+</div><h4 id='method.metadata' class='method'><code>fn <a href='#method.metadata' class='fnname'>metadata</a>(&amp;self) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/fs/struct.Metadata.html' title='std::fs::Metadata'>Metadata</a>&gt;</code></h4>
+<div class='docblock'><p>Queries metadata about the underlying file.</p>
 </div><h4 id='method.set_len' class='method'><code>fn <a href='#method.set_len' class='fnname'>set_len</a>(&amp;self, size: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
 <div class='docblock'><p>Truncate the file to <code>size</code> bytes.</p>
 </div><h4 id='method.path' class='method'><code>fn <a href='#method.path' class='fnname'>path</a>(&amp;self) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a></code></h4>
