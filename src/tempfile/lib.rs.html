@@ -361,6 +361,9 @@
 <span id="319">319</span>
 <span id="320">320</span>
 <span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
@@ -521,9 +524,12 @@
     }
 }
 
+<span class='doccomment'>/// Error returned when persisting a temporary file fails</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PersistError</span> {
+    <span class='doccomment'>/// The underlying IO error.</span>
     <span class='kw'>pub</span> <span class='ident'>error</span>: <span class='ident'>io</span>::<span class='ident'>Error</span>,
+    <span class='doccomment'>/// The temporary file that couldn&#39;t be persisted.</span>
     <span class='kw'>pub</span> <span class='ident'>file</span>: <span class='ident'>NamedTempFile</span>,
 }
 

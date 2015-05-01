@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NamedTempFile","A named temporary file."],["PersistError",""],["TempFile","An unnamed temporary file."]]});
+initSidebarItems({"struct":[["NamedTempFile","A named temporary file."],["PersistError","Error returned when persisting a temporary file fails"],["TempFile","An unnamed temporary file."]]});
