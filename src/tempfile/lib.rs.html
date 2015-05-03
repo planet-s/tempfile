@@ -364,11 +364,53 @@
 <span id="322">322</span>
 <span id="323">323</span>
 <span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>convert</span>, <span class='ident'>from_raw_os</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>windows</span>, <span class='ident'>feature</span>(<span class='ident'>fs_ext</span>))]</span>
 <span class='doccomment'>//! Securely create and manage temporary files. Temporary files created by this create are</span>
 <span class='doccomment'>//! automatically deleted.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! This crate provides two temporary file variants: `TempFile` and `NamedTempFile`. When choosing</span>
+<span class='doccomment'>//! between the variants, prefer `TempFile` unless you either need to know the file&#39;s path or to be</span>
+<span class='doccomment'>//! able to persist it.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Differences</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ## Resource Leaking</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! `TempFile` will (almost) never fail to cleanup temporary files but `NamedTempFile` will if its</span>
+<span class='doccomment'>//! destructor doesn&#39;t run. This is because `TempFile` relies on the OS to cleanup the underlying</span>
+<span class='doccomment'>//! file so the file while `NamedTempFile` relies on its destructor to do so.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ## Security</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! In the presence of pathological temporary file cleaner, relying on file paths is unsafe because</span>
+<span class='doccomment'>//! a temporary file cleaner could delete the temporary file which an attacker could then replace.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! `TempFile` doesn&#39;t rely on file paths so this isn&#39;t an issue. However, `NamedTempFile` does</span>
+<span class='doccomment'>//! rely on file paths.</span>
+<span class='doccomment'>//!</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rand</span>;
 
