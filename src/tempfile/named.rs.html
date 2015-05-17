@@ -231,6 +231,33 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::{<span class='self'>self</span>, <span class='ident'>File</span>};
@@ -312,6 +339,25 @@
     }
 
     <span class='doccomment'>/// Create a new temporary file.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// *SECURITY WARNING:* This will create a temporary file in the default temporary file</span>
+    <span class='doccomment'>/// directory (platform dependent). These directories are often patrolled by temporary file</span>
+    <span class='doccomment'>/// cleaners so only use this method if you&#39;re *positive* that the temporary file cleaner won&#39;t</span>
+    <span class='doccomment'>/// delete your file.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Reasons to use this method:</span>
+    <span class='doccomment'>///   1. The file has a short lifetime and your temporary file cleaner is sane (doesn&#39;t delete</span>
+    <span class='doccomment'>///      recently accessed files).</span>
+    <span class='doccomment'>///   2. You trust every user on your system (i.e. you are the only user).</span>
+    <span class='doccomment'>///   3. You have disabled your system&#39;s temporary file cleaner or verified that your system</span>
+    <span class='doccomment'>///      doesn&#39;t have a temporary file cleaner.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Reasons not to use this method:</span>
+    <span class='doccomment'>///   1. You&#39;ll fix it later. No you won&#39;t.</span>
+    <span class='doccomment'>///   2. You don&#39;t care about the security of the temporary file. If none of the &quot;reasons to</span>
+    <span class='doccomment'>///      use this method&quot; apply, referring to a temporary file by name may allow an attacker</span>
+    <span class='doccomment'>///      to create/overwrite your non-temporary files. There are exceptions but if you don&#39;t</span>
+    <span class='doccomment'>///      already know them, don&#39;t use this method.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>NamedTempFile</span><span class='op'>&gt;</span> {
         <span class='ident'>Self</span>::<span class='ident'>new_in</span>(<span class='kw-2'>&amp;</span><span class='ident'>env</span>::<span class='ident'>temp_dir</span>())
@@ -343,6 +389,10 @@
     }
 
     <span class='doccomment'>/// Get the temporary file&#39;s path.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// *SECURITY WARNING:* Only use this method if you&#39;re positive that a temporary file cleaner</span>
+    <span class='doccomment'>/// won&#39;t have deleted your file. Otherwise, the path returned by this method may refer to an</span>
+    <span class='doccomment'>/// attacker controlled file.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Path</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>inner</span>().<span class='ident'>path</span>
@@ -364,6 +414,10 @@
     <span class='doccomment'>/// fails, it will return `self` in the resulting PersistError.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Note: Temporary files cannot be persisted across filesystems.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// *SECURITY WARNING:* Only use this method if you&#39;re positive that a temporary file cleaner</span>
+    <span class='doccomment'>/// won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled</span>
+    <span class='doccomment'>/// file.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>persist</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span>, <span class='ident'>PersistError</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='ident'>fs</span>::<span class='ident'>rename</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>inner</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>) {

@@ -56,6 +56,25 @@ dropped, these temporary files will not be deleted on abort, resource leak, earl
 <p>Please use TempFile unless you absolutely need a named file.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a>&gt;</code></h4>
 <div class='docblock'><p>Create a new temporary file.</p>
+
+<p><em>SECURITY WARNING:</em> This will create a temporary file in the default temporary file
+directory (platform dependent). These directories are often patrolled by temporary file
+cleaners so only use this method if you&#39;re <em>positive</em> that the temporary file cleaner won&#39;t
+delete your file.</p>
+
+<p>Reasons to use this method:
+  1. The file has a short lifetime and your temporary file cleaner is sane (doesn&#39;t delete
+     recently accessed files).
+  2. You trust every user on your system (i.e. you are the only user).
+  3. You have disabled your system&#39;s temporary file cleaner or verified that your system
+     doesn&#39;t have a temporary file cleaner.</p>
+
+<p>Reasons not to use this method:
+  1. You&#39;ll fix it later. No you won&#39;t.
+  2. You don&#39;t care about the security of the temporary file. If none of the &quot;reasons to
+     use this method&quot; apply, referring to a temporary file by name may allow an attacker
+     to create/overwrite your non-temporary files. There are exceptions but if you don&#39;t
+     already know them, don&#39;t use this method.</p>
 </div><h4 id='method.new_in' class='method'><code>fn <a href='#method.new_in' class='fnname'>new_in</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(dir: P) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a>&gt;</code></h4>
 <div class='docblock'><p>Create a new temporary file in the specified directory.</p>
 </div><h4 id='method.metadata' class='method'><code>fn <a href='#method.metadata' class='fnname'>metadata</a>(&amp;self) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/fs/struct.Metadata.html' title='std::fs::Metadata'>Metadata</a>&gt;</code></h4>
@@ -64,6 +83,10 @@ dropped, these temporary files will not be deleted on abort, resource leak, earl
 <div class='docblock'><p>Truncate the file to <code>size</code> bytes.</p>
 </div><h4 id='method.path' class='method'><code>fn <a href='#method.path' class='fnname'>path</a>(&amp;self) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a></code></h4>
 <div class='docblock'><p>Get the temporary file&#39;s path.</p>
+
+<p><em>SECURITY WARNING:</em> Only use this method if you&#39;re positive that a temporary file cleaner
+won&#39;t have deleted your file. Otherwise, the path returned by this method may refer to an
+attacker controlled file.</p>
 </div><h4 id='method.close' class='method'><code>fn <a href='#method.close' class='fnname'>close</a>(self) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
 <div class='docblock'><p>Close and remove the temporary file.</p>
 
@@ -75,6 +98,10 @@ dropped, these temporary files will not be deleted on abort, resource leak, earl
 fails, it will return <code>self</code> in the resulting PersistError.</p>
 
 <p>Note: Temporary files cannot be persisted across filesystems.</p>
+
+<p><em>SECURITY WARNING:</em> Only use this method if you&#39;re positive that a temporary file cleaner
+won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled
+file.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> for <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.read' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html#method.read' class='fnname'>read</a>(&amp;mut self, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
