@@ -68,9 +68,6 @@ dropped, these temporary files will not be deleted on abort, resource leak, earl
 <div class='docblock'><p>Close and remove the temporary file.</p>
 
 <p>Use this if you want to detect errors in deleting the file.</p>
-</div><h4 id='method.into_path' class='method'><code>fn <a href='#method.into_path' class='fnname'>into_path</a>(self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a></code></h4>
-<div class='docblock'><p>Extract the path to the temporary file. Calling this will prevent the temporary file from
-being automatically deleted.</p>
 </div><h4 id='method.persist' class='method'><code>fn <a href='#method.persist' class='fnname'>persist</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(self, new_path: P) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a>, PersistError&gt;</code></h4>
 <div class='docblock'><p>Persist the temporary file at the target path.</p>
 

@@ -231,14 +231,6 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::{<span class='self'>self</span>, <span class='ident'>File</span>};
@@ -364,14 +356,6 @@
         <span class='kw'>let</span> <span class='ident'>NamedTempFileInner</span> { <span class='ident'>path</span>, <span class='ident'>file</span> } <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>drop</span>(<span class='ident'>file</span>);
         <span class='ident'>fs</span>::<span class='ident'>remove_file</span>(<span class='ident'>path</span>)
-    }
-
-    <span class='doccomment'>/// Extract the path to the temporary file. Calling this will prevent the temporary file from</span>
-    <span class='doccomment'>/// being automatically deleted.</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_path</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PathBuf</span> {
-        <span class='kw'>let</span> <span class='ident'>NamedTempFileInner</span> { <span class='ident'>path</span>, .. } <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
-        <span class='ident'>path</span>
     }
 
     <span class='doccomment'>/// Persist the temporary file at the target path.</span>
