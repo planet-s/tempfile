@@ -76,6 +76,12 @@
 <span id="34">34</span>
 <span id="35">35</span>
 <span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Securely create and manage temporary files. Temporary files created by this create are</span>
 <span class='doccomment'>//! automatically deleted.</span>
@@ -102,6 +108,12 @@
 <span class='doccomment'>//!</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rand</span>;
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>winapi</span>;
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>kernel32</span>;
 
 <span class='kw'>const</span> <span class='ident'>NUM_RETRIES</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='number'>31</span>;
 <span class='kw'>const</span> <span class='ident'>NUM_RAND_CHARS</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>12</span>;
