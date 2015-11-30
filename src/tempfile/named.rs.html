@@ -260,6 +260,25 @@
 <span id="218">218</span>
 <span id="219">219</span>
 <span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
 </pre><pre class='rust '>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
@@ -428,7 +447,26 @@
     <span class='doccomment'>/// won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled</span>
     <span class='doccomment'>/// file.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>persist</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span>, <span class='ident'>PersistError</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='ident'>imp</span>::<span class='ident'>persist</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>inner</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>.<span class='ident'>as_ref</span>()) {
+        <span class='kw'>match</span> <span class='ident'>imp</span>::<span class='ident'>persist</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>inner</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>.<span class='ident'>as_ref</span>(), <span class='boolval'>true</span>) {
+            <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>PersistError</span> { <span class='ident'>file</span>: <span class='self'>self</span>, <span class='ident'>error</span>: <span class='ident'>e</span> }),
+        }
+    }
+
+    <span class='doccomment'>/// Persist the temporary file at the target path iff no file exists there.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// If a file exists at the target path, fail. If this method fails, it will return `self` in</span>
+    <span class='doccomment'>/// the resulting PersistError.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Note: Temporary files cannot be persisted across filesystems.</span>
+    <span class='doccomment'>/// Also Note: This method is not atomic. It can leave the original link to the temporary file</span>
+    <span class='doccomment'>/// behind.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// *SECURITY WARNING:* Only use this method if you&#39;re positive that a temporary file cleaner</span>
+    <span class='doccomment'>/// won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled</span>
+    <span class='doccomment'>/// file.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>persist_noclobber</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span>, <span class='ident'>PersistError</span><span class='op'>&gt;</span> {
+        <span class='kw'>match</span> <span class='ident'>imp</span>::<span class='ident'>persist</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>inner</span>().<span class='ident'>path</span>, <span class='ident'>new_path</span>.<span class='ident'>as_ref</span>(), <span class='boolval'>false</span>) {
             <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>),
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>PersistError</span> { <span class='ident'>file</span>: <span class='self'>self</span>, <span class='ident'>error</span>: <span class='ident'>e</span> }),
         }

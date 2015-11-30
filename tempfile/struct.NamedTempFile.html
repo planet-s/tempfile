@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-113' class='srclink' href='../src/tempfile/named.rs.html#23' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-120' class='srclink' href='../src/tempfile/named.rs.html#23' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NamedTempFile(_);</pre><div class='docblock'><p>A named temporary file.</p>
 
 <p>This variant is <em>NOT</em> secure/reliable in the presence of a pathological temporary file cleaner.</p>
@@ -94,6 +94,19 @@ attacker controlled file.</p>
 fails, it will return <code>self</code> in the resulting PersistError.</p>
 
 <p>Note: Temporary files cannot be persisted across filesystems.</p>
+
+<p><em>SECURITY WARNING:</em> Only use this method if you&#39;re positive that a temporary file cleaner
+won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled
+file.</p>
+</div><h4 id='method.persist_noclobber' class='method'><code>fn <a href='#method.persist_noclobber' class='fnname'>persist_noclobber</a>&lt;P: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(self, new_path: P) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a>, PersistError&gt;</code></h4>
+<div class='docblock'><p>Persist the temporary file at the target path iff no file exists there.</p>
+
+<p>If a file exists at the target path, fail. If this method fails, it will return <code>self</code> in
+the resulting PersistError.</p>
+
+<p>Note: Temporary files cannot be persisted across filesystems.
+Also Note: This method is not atomic. It can leave the original link to the temporary file
+behind.</p>
 
 <p><em>SECURITY WARNING:</em> Only use this method if you&#39;re positive that a temporary file cleaner
 won&#39;t have deleted your file. Otherwise, you might end up persisting an attacker controlled
