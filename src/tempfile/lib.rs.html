@@ -116,14 +116,14 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>kernel32</span>;
 
 <span class='kw'>const</span> <span class='ident'>NUM_RETRIES</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='number'>31</span>;
-<span class='kw'>const</span> <span class='ident'>NUM_RAND_CHARS</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>12</span>;
+<span class='kw'>const</span> <span class='ident'>NUM_RAND_CHARS</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>6</span>;
 
-<span class='kw'>mod</span> <span class='ident'>imp</span>;
 <span class='kw'>mod</span> <span class='ident'>util</span>;
+<span class='kw'>mod</span> <span class='ident'>imp</span>;
 <span class='kw'>mod</span> <span class='ident'>named</span>;
 <span class='kw'>mod</span> <span class='ident'>unnamed</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>named</span>::<span class='ident'>NamedTempFile</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>named</span>::{<span class='ident'>NamedTempFile</span>, <span class='ident'>NamedTempFileOptions</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>unnamed</span>::<span class='ident'>TempFile</span>;
 </pre>
 </section>
