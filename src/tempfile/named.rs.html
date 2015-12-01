@@ -349,8 +349,6 @@
 <span id="307">307</span>
 <span id="308">308</span>
 <span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::{<span class='self'>self</span>, <span class='ident'>File</span>};
@@ -584,15 +582,6 @@
 }
 
 
-
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>NamedTempFileOptions</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span> , <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
-    <span class='ident'>random_len</span>: <span class='ident'>usize</span>,
-    <span class='ident'>prefix</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>,
-    <span class='ident'>suffix</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>str</span>
-}
-
-
 <span class='doccomment'>/// Create a new temporary file with custom parameters.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Example</span>
@@ -607,6 +596,13 @@
 <span class='doccomment'>///                         .unwrap();</span>
 <span class='doccomment'>/// println!(&quot;{:?}&quot;, named_temp_file);        //Something like &quot;NamedTempFile(\&quot;/tmp/hogehoge65R8Y.rs\&quot;)&quot;</span>
 <span class='doccomment'>/// ```</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>NamedTempFileOptions</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span> , <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
+    <span class='ident'>random_len</span>: <span class='ident'>usize</span>,
+    <span class='ident'>prefix</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>,
+    <span class='ident'>suffix</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>str</span>
+}
+
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> <span class='ident'>NamedTempFileOptions</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Create a new NamedTempFileOptions</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {

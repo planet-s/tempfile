@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NamedTempFile","A named temporary file."],["NamedTempFileOptions",""],["TempFile","An unnamed temporary file."]]});
+initSidebarItems({"struct":[["NamedTempFile","A named temporary file."],["NamedTempFileOptions","Create a new temporary file with custom parameters."],["TempFile","An unnamed temporary file."]]});
