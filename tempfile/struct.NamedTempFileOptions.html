@@ -57,7 +57,7 @@
                         .<span class='ident'>prefix</span>(<span class='string'>&quot;hogehoge&quot;</span>)
                         .<span class='ident'>suffix</span>(<span class='string'>&quot;.rs&quot;</span>)
                         .<span class='ident'>rand_bytes</span>(<span class='number'>5</span>)
-                        .<span class='ident'>create_in</span>(<span class='string'>&quot;/tmp&quot;</span>)
+                        .<span class='ident'>create</span>()
                         .<span class='ident'>unwrap</span>();
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>named_temp_file</span>);        <span class='comment'>//Something like &quot;NamedTempFile(\&quot;/tmp/hogehoge65R8Y.rs\&quot;)&quot;</span></pre>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; Self</code></h4>
