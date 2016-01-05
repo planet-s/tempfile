@@ -5,5 +5,4 @@ searchIndex['libc'] = {"items":[[3,"utimbuf","libc","",null,null],[12,"actime","
 searchIndex['advapi32'] = {"items":[],"paths":[]};
 searchIndex['kernel32'] = {"items":[],"paths":[]};
 searchIndex['winapi'] = {"items":[],"paths":[]};
-searchIndex['build'] = {"items":[[0,"","build","",null,null],[5,"link","","",null,{"inputs":[{"name":"str"},{"name":"bool"}],"output":null}]],"paths":[]};
 initSearch(searchIndex);
