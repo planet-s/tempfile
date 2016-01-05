@@ -9,6 +9,7 @@
 
     <title>named.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -349,6 +350,16 @@
 <span id="307">307</span>
 <span id="308">308</span>
 <span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::{<span class='self'>self</span>, <span class='ident'>File</span>};
@@ -531,6 +542,16 @@
             <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>file</span>),
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>PersistError</span> { <span class='ident'>file</span>: <span class='self'>self</span>, <span class='ident'>error</span>: <span class='ident'>e</span> }),
         }
+    }
+
+    <span class='doccomment'>/// Reopen the temporary file.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This function is useful when you need multiple independent handles to the same file.</span>
+    <span class='doccomment'>/// It&#39;s perfectly fine to drop the original `NamedTempFile` while holding on to `File`s</span>
+    <span class='doccomment'>/// returned by this function; the `File`s will remain usable. However, they may not be</span>
+    <span class='doccomment'>/// nameable.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>reopen</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span><span class='op'>&gt;</span> {
+        <span class='ident'>imp</span>::<span class='ident'>reopen</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='self'>self</span>.<span class='ident'>path</span>())
     }
 }
 
