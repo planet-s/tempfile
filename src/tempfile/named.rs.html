@@ -360,6 +360,12 @@
 <span id="317">317</span>
 <span id="318">318</span>
 <span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>, <span class='ident'>SeekFrom</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::{<span class='self'>self</span>, <span class='ident'>File</span>};
@@ -615,7 +621,13 @@
 <span class='doccomment'>///                         .rand_bytes(5)</span>
 <span class='doccomment'>///                         .create()</span>
 <span class='doccomment'>///                         .unwrap();</span>
-<span class='doccomment'>/// println!(&quot;{:?}&quot;, named_temp_file);        //Something like &quot;NamedTempFile(\&quot;/tmp/hogehoge65R8Y.rs\&quot;)&quot;</span>
+<span class='doccomment'>/// let name = named_temp_file.path()</span>
+<span class='doccomment'>///   .file_name().unwrap()</span>
+<span class='doccomment'>///   .to_str().unwrap();</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// assert!(name.starts_with(&quot;hogehoge&quot;));</span>
+<span class='doccomment'>/// assert!(name.ends_with(&quot;.rs&quot;));</span>
+<span class='doccomment'>/// assert_eq!(name.len(), &quot;hogehoge.rs&quot;.len() + 5);</span>
 <span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>NamedTempFileOptions</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span> , <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
