@@ -46,15 +46,20 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-102' class='srclink' href='../src/tempfile/named.rs.html#22' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-102' class='srclink' href='../src/tempfile/named.rs.html#26' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NamedTempFile(_);</pre><div class='docblock'><p>A named temporary file.</p>
 
 <p>This variant is <em>NOT</em> secure/reliable in the presence of a pathological temporary file cleaner.</p>
 
-<p>NamedTempFiles are deleted on drop. As rust doesn&#39;t guarantee that a struct will ever be
+<p><code>NamedTempFiles</code> are deleted on drop. As rust doesn&#39;t guarantee that a struct will ever be
 dropped, these temporary files will not be deleted on abort, resource leak, early exit, etc.</p>
 
-<p>Please use TempFile unless you absolutely need a named file.</p>
+<p>Please use <code>TempFile</code> unless you absolutely need a named file.</p>
+
+<p>Note: To convert a <code>NamedTempFile</code> into a normal temporary file, use the
+provided conversion: <code>let my_file: File = my_temp_file.into();</code>. The file
+will be automatically deleted on close. However, if you do this, the file&#39;s
+path will no longer be valid.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a>&gt;</code></h4>
 <div class='docblock'><p>Create a new temporary file.</p>
 
