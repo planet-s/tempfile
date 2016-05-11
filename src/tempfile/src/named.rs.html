@@ -645,7 +645,7 @@
     <span class='doccomment'>/// returned by this function; the `File`s will remain usable. However, they may not be</span>
     <span class='doccomment'>/// nameable.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>reopen</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span><span class='op'>&gt;</span> {
-        <span class='ident'>imp</span>::<span class='ident'>reopen</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='self'>self</span>.<span class='ident'>path</span>())
+        <span class='ident'>imp</span>::<span class='ident'>reopen</span>(<span class='self'>self</span>, <span class='self'>self</span>.<span class='ident'>path</span>())
     }
 }
 

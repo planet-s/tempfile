@@ -92,7 +92,7 @@
 <span class='doccomment'>/// Other *nix: The temporary file is immediately unlinked on create. The OS will delete it when</span>
 <span class='doccomment'>/// the last open copy of it is closed.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Windows: The temporary file is marked DeleteOnClose and, again, will be deleted when the last</span>
+<span class='doccomment'>/// Windows: The temporary file is marked `DeleteOnClose` and, again, will be deleted when the last</span>
 <span class='doccomment'>/// open copy of it is closed. Unlike *nix operating systems, the file is not immediately unlinked</span>
 <span class='doccomment'>/// from the filesystem.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>tempfile</span>() <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>File</span><span class='op'>&gt;</span> {
