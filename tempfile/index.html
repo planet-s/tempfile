@@ -47,13 +47,18 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/tempfile/src/lib.rs.html#1-43' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/tempfile/src/lib.rs.html#1-50' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Securely create and manage temporary files. Temporary files created by this create are
 automatically deleted.</p>
 
 <p>This crate provides two temporary file variants: a <code>tempfile()</code> function that returns standard
 <code>File</code> objects and <code>NamedTempFile</code>. When choosing between the variants, prefer <code>tempfile()</code>
 unless you either need to know the file&#39;s path or to be able to persist it.</p>
+
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
+<pre><code class="language-norun">use tempfile::tempfile;
+let mut file: File = tmpfile().unwrap();
+</code></pre>
 
 <h1 id='differences' class='section-header'><a href='#differences'>Differences</a></h1>
 <h2 id='resource-leaking' class='section-header'><a href='#resource-leaking'>Resource Leaking</a></h2>
@@ -127,6 +132,8 @@ rely on file paths.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
