@@ -182,9 +182,9 @@
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>stat64</span> <span class='kw'>as</span> <span class='ident'>stat_t</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
-<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>open</span> <span class='kw'>as</span> <span class='ident'>open</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>open</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
-<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>fstat</span> <span class='kw'>as</span> <span class='ident'>fstat</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>fstat</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>stat</span> <span class='kw'>as</span> <span class='ident'>stat_t</span>;
 
