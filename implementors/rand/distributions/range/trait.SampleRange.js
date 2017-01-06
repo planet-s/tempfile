@@ -1,4 +1,6 @@
 (function() {var implementors = {};
+implementors["rand"] = [];
+implementors["tempfile"] = [];
 implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];
 
             if (window.register_implementors) {

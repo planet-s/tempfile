@@ -9,8 +9,10 @@
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -87,6 +89,12 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Securely create and manage temporary files. Temporary files created by this create are</span>
 <span class='doccomment'>//! automatically deleted.</span>
@@ -94,6 +102,15 @@
 <span class='doccomment'>//! This crate provides two temporary file variants: a `tempfile()` function that returns standard</span>
 <span class='doccomment'>//! `File` objects and `NamedTempFile`. When choosing between the variants, prefer `tempfile()`</span>
 <span class='doccomment'>//! unless you either need to know the file&#39;s path or to be able to persist it.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Example</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! use tempfile::tempfile;</span>
+<span class='doccomment'>//! use std::fs::File;</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! let mut file: File = tempfile().expect(&quot;failed to create temporary file&quot;);</span>
+<span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! # Differences</span>
 <span class='doccomment'>//!</span>
@@ -112,9 +129,6 @@
 <span class='doccomment'>//! rely on file paths.</span>
 <span class='doccomment'>//!</span>
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;clippy&quot;</span>, <span class='ident'>feature</span>(<span class='ident'>plugin</span>))]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;clippy&quot;</span>, <span class='ident'>plugin</span>(<span class='ident'>clippy</span>))]</span>
-
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rand</span>;
 
@@ -132,7 +146,7 @@
 <span class='kw'>mod</span> <span class='ident'>named</span>;
 <span class='kw'>mod</span> <span class='ident'>unnamed</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>named</span>::{<span class='ident'>NamedTempFile</span>, <span class='ident'>NamedTempFileOptions</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>named</span>::{<span class='ident'>NamedTempFile</span>, <span class='ident'>NamedTempFileOptions</span>, <span class='ident'>PersistError</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>unnamed</span>::{<span class='ident'>tempfile</span>, <span class='ident'>tempfile_in</span>};
 </pre>
 </section>
@@ -158,6 +172,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -178,7 +194,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
@@ -189,11 +205,9 @@
     <script>
         window.rootPath = "../../";
         window.currentCrate = "tempfile";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 (function() {var implementors = {};
+implementors["libc"] = [];
+implementors["tempfile"] = [];
 implementors['libc'] = [];implementors["libc"] = [];implementors["libc"] = [];implementors["libc"] = [];implementors["libc"] = [];implementors["libc"] = [];
 
             if (window.register_implementors) {
