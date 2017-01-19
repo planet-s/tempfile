@@ -2,7 +2,6 @@
 implementors["libc"] = [];
 implementors["rand"] = [];
 implementors["tempfile"] = [];
-implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors['rand'] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];implementors["rand"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
