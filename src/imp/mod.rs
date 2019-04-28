@@ -1,7 +1,7 @@
-#[cfg(any(unix, target_os = "redox"))]
+#[cfg(unix)]
 mod unix;
 
-#[cfg(any(unix, target_os = "redox"))]
+#[cfg(unix)]
 pub use self::unix::*;
 
 #[cfg(windows)]

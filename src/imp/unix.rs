@@ -1,4 +1,3 @@
-#[cfg(not(target_os = "redox"))]
 use libc::{rename, link, unlink, c_char, c_int, O_EXCL, O_RDWR, O_CREAT, O_CLOEXEC};
 use std::os::unix::ffi::OsStrExt;
 use std::ffi::CString;
@@ -11,13 +10,9 @@ use util;
 #[cfg(all(lfs_support, target_os = "linux"))]
 use libc::{open64 as open, fstat64 as fstat, stat64 as stat_t};
 
-#[cfg(not(any(all(lfs_support, target_os = "linux"), target_os = "redox")))]
+#[cfg(not(all(lfs_support, target_os = "linux")))]
 use libc::{open, fstat, stat as stat_t};
 
-#[cfg(target_os = "redox")]
-use syscall::{self, open, fstat, Stat as stat_t, O_EXCL, O_RDWR, O_CREAT, O_CLOEXEC};
-
-#[cfg(not(target_os = "redox"))]
 #[inline(always)]
 pub fn cvt_err(result: c_int) -> io::Result<c_int> {
     if result == -1 {
@@ -27,12 +22,6 @@ pub fn cvt_err(result: c_int) -> io::Result<c_int> {
     }
 }
 
-#[cfg(target_os = "redox")]
-#[inline(always)]
-pub fn cvt_err(result: Result<usize, syscall::Error>) -> io::Result<usize> {
-    result.map_err(|err| io::Error::from_raw_os_error(err.errno))
-}
-
 // Stolen from std.
 pub fn cstr(path: &Path) -> io::Result<CString> {
     // TODO: Use OsStr::to_cstring (convert)
@@ -40,22 +29,12 @@ pub fn cstr(path: &Path) -> io::Result<CString> {
         .map_err(|_| io::Error::new(io::ErrorKind::InvalidInput, "path contained a null"))
 }
 
-#[cfg(not(target_os = "redox"))]
 pub fn create_named(path: &Path) -> io::Result<File> {
     unsafe {
         let path = try!(cstr(path));
         let fd = try!(cvt_err(open(path.as_ptr() as *const c_char,
                                    O_CLOEXEC | O_EXCL | O_RDWR | O_CREAT,
                                    0o600)));
-        Ok(FromRawFd::from_raw_fd(fd))
-    }
-}
-
-#[cfg(target_os = "redox")]
-pub fn create_named(path: &Path) -> io::Result<File> {
-    unsafe {
-        let fd = try!(cvt_err(open(path.as_os_str().as_bytes(),
-                                   O_CLOEXEC | O_EXCL | O_RDWR | O_CREAT | 0o600)));
         Ok(FromRawFd::from_raw_fd(fd))
     }
 }
@@ -116,7 +95,6 @@ pub fn reopen(file: &File, path: &Path) -> io::Result<File> {
     }
 }
 
-#[cfg(not(target_os = "redox"))]
 pub fn persist(old_path: &Path, new_path: &Path, overwrite: bool) -> io::Result<()> {
     unsafe {
         let old_path = try!(cstr(old_path));
@@ -133,10 +111,4 @@ pub fn persist(old_path: &Path, new_path: &Path, overwrite: bool) -> io::Result<
         }
         Ok(())
     }
-}
-
-#[cfg(target_os = "redox")]
-pub fn persist(old_path: &Path, new_path: &Path, overwrite: bool) -> io::Result<()> {
-    // XXX implement when possible
-    Err(io::Error::from_raw_os_error(syscall::ENOSYS))
 }
